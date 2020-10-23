@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --cellule: 200px;
+}
+
+body {
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.joueur-actuel {
+    
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.plateau {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+}
+
+
+.cellule {
+    border: 5px solid black;
+    width: var(--cellule);
+    height: var(--cellule);
+}
+  
+.rejouer {
+    display: inline-block;
+    background-color: #4CAF50;
+    padding: 16px 132px;
+    border: none;
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: 400;
+    cursor: pointer;
+    border: 3px solid black;
+}
+
+.rejouer:hover{
+    background-color: #39833b;
+}
+
+/* Enlever bordures ds coins */
+
+.cellule:nth-child(1),
+.cellule:nth-child(2),
+.cellule:nth-child(3){
+    border-top: none;
+}
+.cellule:nth-child(7),
+.cellule:nth-child(8),
+.cellule:nth-child(9){
+    border-bottom: none;
+}
+.cellule:nth-child(3n+3){
+    border-right: none;
+}
+.cellule:nth-child(3n+1){
+    border-left: none;
+}
+
+.player-one {
+    background: #39833b;
+}
+
+.player-two {
+    background: #f32c2c;
+}
