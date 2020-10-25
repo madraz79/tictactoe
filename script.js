@@ -7,8 +7,8 @@ const $rejouer = document.querySelector('.rejouer');
 // Constantes
 const CLASS_JOUEUR_1 = "player-one";
 const CLASS_JOUEUR_2 = "player-two";
-const NOM_JOUEUR_1 = 'Joueur 1 (vert)';
-const NOM_JOUEUR_2 = 'Joueur 2 (rouge)';
+const NOM_JOUEUR_1 = 'Le vert';
+const NOM_JOUEUR_2 = 'Le rouge';
 
 // Variables
 let tourJoueur2 = false;
@@ -33,10 +33,11 @@ function auClic(event){
     
     const celluleActuelle = event.target;
     const classeActuelle = tourJoueur2 ? CLASS_JOUEUR_2 : CLASS_JOUEUR_1;
-    const joueurActuel = tourJoueur2 ? NOM_JOUEUR_1 : NOM_JOUEUR_2;
+    const joueurSuivant = tourJoueur2 ? NOM_JOUEUR_1 : NOM_JOUEUR_2;
+    const joueurActuel = tourJoueur2 ? NOM_JOUEUR_2 : NOM_JOUEUR_1;
 
     celluleActuelle.classList.add(classeActuelle);
-    $joueur.textContent = joueurActuel;
+    $joueur.textContent = joueurSuivant;
     
 
     // if (tourJoueur2) {
@@ -47,8 +48,9 @@ function auClic(event){
     //     // False
     //     classeActuelle = CLASS_JOUEUR_1
     // }
-    if(verifierVictoire(classeActuelle, joueurActuel)){
-        $joueur.textContent = joueurActuel;
+    if(verifierVictoire(classeActuelle, joueurSuivant)){
+
+        $joueur.textContent = joueurActuel + ' a gagné !';
         stop();
     } else {
 
@@ -95,38 +97,48 @@ function egalite() {
 
 }
 
-function verifierVictoire(classeActuelle, joueurActuel) {
+function verifierVictoire(classeActuelle, joueurSuivant) {
 
     // if($cellules[0].classList.contains(classeActuelle) && $cellules[1].classList.contains(classeActuelle) && $cellules[2].classList.contains(classeActuelle)) console.log('Gagné');
 
     for (let i = 0; i < $cellules.length; i = i + 3) {
-        if (verifHorizontal($cellules, i, classeActuelle, joueurActuel)) return true;
+        if (verifHorizontal($cellules, i, classeActuelle, joueurSuivant)) return true;
     }
 
     for (let i = 0; i < $cellules.length - 6 ; i++) {
-        if (verifVertical($cellules, i, classeActuelle, joueurActuel)) return true;
+        if (verifVertical($cellules, i, classeActuelle, joueurSuivant)) return true;
     }
 
-    if(verifDiagonal($cellules, classeActuelle, joueurActuel)) return true;
+    if(verifDiagonal($cellules, classeActuelle, joueurSuivant)) return true;
 
     return false;
 
 }
 
-function verifHorizontal(cell, i, classeActuelle, joueurActuel) {
-    if (cell[i].classList.contains(classeActuelle) && cell[i + 1].classList.contains(classeActuelle) && cell[i + 2].classList.contains(classeActuelle)) console.log('Gagné horizontal');
+function verifHorizontal(cell, i, classeActuelle) {
+    if (cell[i].classList.contains(classeActuelle) && cell[i + 1].classList.contains(classeActuelle) && cell[i + 2].classList.contains(classeActuelle)) {
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
-function verifVertical(cell, i, classeActuelle, joueurActuel){
-    if (cell[i].classList.contains(classeActuelle) && cell[i + 3].classList.contains(classeActuelle) && cell[i + 6].classList.contains(classeActuelle)) console.log('Gagné vertical');
+function verifVertical(cell, i, classeActuelle){
+    if (cell[i].classList.contains(classeActuelle) && cell[i + 3].classList.contains(classeActuelle) && cell[i + 6].classList.contains(classeActuelle)) {
+        return true;
+    }
+    else{
+        return false;
+    }
 
 }
 
-function verifDiagonal(cell, classeActuelle, joueurActuel){
+function verifDiagonal(cell, classeActuelle){
     if (cell[0].classList.contains(classeActuelle) && cell[4].classList.contains(classeActuelle) && cell[8].classList.contains(classeActuelle) 
     || cell[2].classList.contains(classeActuelle) && cell[4].classList.contains(classeActuelle) && cell[6].classList.contains(classeActuelle)) {
             // console.log('Gagné diagonal');
-            // $joueur.textContent = joueurActuel;
+            // $joueur.textContent = joueurSuivant;
             return true;
     } else {
         return false;
