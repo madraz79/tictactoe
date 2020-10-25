@@ -39,19 +39,11 @@ function auClic(event){
     celluleActuelle.classList.add(classeActuelle);
     $joueur.textContent = joueurSuivant;
     
-
-    // if (tourJoueur2) {
-    //     // True
-    //     classeActuelle = CLASS_JOUEUR_2
-    // }
-    // else {
-    //     // False
-    //     classeActuelle = CLASS_JOUEUR_1
-    // }
     if(verifierVictoire(classeActuelle, joueurSuivant)){
 
         $joueur.textContent = joueurActuel + ' a gagné !';
         stop();
+
     } else {
 
         if(egalite() == true) {
@@ -82,8 +74,8 @@ function reset() {
 
 function egalite() {
 
-    for(let i = 0; i < $cellules.length; i++)
-    {
+    for(let i = 0; i < $cellules.length; i++) {
+
         const cellule = $cellules[i];
         const classeExistante = cellule.classList.contains(CLASS_JOUEUR_1) || cellule.classList.contains(CLASS_JOUEUR_2);
 
@@ -98,8 +90,6 @@ function egalite() {
 }
 
 function verifierVictoire(classeActuelle, joueurSuivant) {
-
-    // if($cellules[0].classList.contains(classeActuelle) && $cellules[1].classList.contains(classeActuelle) && $cellules[2].classList.contains(classeActuelle)) console.log('Gagné');
 
     for (let i = 0; i < $cellules.length; i = i + 3) {
         if (verifHorizontal($cellules, i, classeActuelle, joueurSuivant)) return true;
@@ -116,33 +106,16 @@ function verifierVictoire(classeActuelle, joueurSuivant) {
 }
 
 function verifHorizontal(cell, i, classeActuelle) {
-    if (cell[i].classList.contains(classeActuelle) && cell[i + 1].classList.contains(classeActuelle) && cell[i + 2].classList.contains(classeActuelle)) {
-        return true;
-    }
-    else{
-        return false;
-    }
+    return cell[i].classList.contains(classeActuelle) && cell[i + 1].classList.contains(classeActuelle) && cell[i + 2].classList.contains(classeActuelle);
 }
 
 function verifVertical(cell, i, classeActuelle){
-    if (cell[i].classList.contains(classeActuelle) && cell[i + 3].classList.contains(classeActuelle) && cell[i + 6].classList.contains(classeActuelle)) {
-        return true;
-    }
-    else{
-        return false;
-    }
-
+    return cell[i].classList.contains(classeActuelle) && cell[i + 3].classList.contains(classeActuelle) && cell[i + 6].classList.contains(classeActuelle);
 }
 
 function verifDiagonal(cell, classeActuelle){
-    if (cell[0].classList.contains(classeActuelle) && cell[4].classList.contains(classeActuelle) && cell[8].classList.contains(classeActuelle) 
-    || cell[2].classList.contains(classeActuelle) && cell[4].classList.contains(classeActuelle) && cell[6].classList.contains(classeActuelle)) {
-            // console.log('Gagné diagonal');
-            // $joueur.textContent = joueurSuivant;
-            return true;
-    } else {
-        return false;
-    }
+    return cell[0].classList.contains(classeActuelle) && cell[4].classList.contains(classeActuelle) && cell[8].classList.contains(classeActuelle) 
+    || cell[2].classList.contains(classeActuelle) && cell[4].classList.contains(classeActuelle) && cell[6].classList.contains(classeActuelle);
 }
 
 function stop() {
